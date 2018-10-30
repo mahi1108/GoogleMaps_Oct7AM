@@ -6,9 +6,12 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -36,8 +39,14 @@ class MainActivity : AppCompatActivity() {
 
                                 var options:MarkerOptions = MarkerOptions()
                                 options.position(LatLng(lati,longi))
+                                options.icon(BitmapDescriptorFactory.
+                                        fromResource(R.drawable.car))
+                                options.title("Welcome 2 NIT...")
                                 gMap.addMarker(options)
 
+                                gMap.animateCamera(CameraUpdateFactory.
+                                        newLatLngZoom(LatLng(lati,longi),15.toFloat()))
+                                lManager.removeUpdates(this)
                             }
 
                             override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
